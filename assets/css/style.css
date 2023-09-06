@@ -1,0 +1,521 @@
+:root {
+  --dark-color: #333333;
+  --white-color: #ffffff;
+  --primary-color: #0071bc;
+  --primary-light-color: #f7f9fb;
+  --gray-color: #adadad;
+  --gray-light-color: #eeeeee;
+  --gray-dark-color: #666666;
+  --twitter-color: #1d9bf0;
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  /* 以下2つは、CSSカスタムプロパティで色を指定しています。
+      var(--{指定の名前})とすることで、1.1で指定した名前の値を利用できます
+      */
+  background-color: var(--white-color);
+  border-bottom: solid 1px var(--gray-light-color);
+  padding: 0 24px;
+  z-index: 10000;
+  transition: background-color 0.3s linear;
+  display: flex; /* 横並びにするためにflexを指定 */
+  justify-content: space-between; /* 要素の間にスペースを均等に配置 */
+  align-items: center; /* 要素を垂直方向に中央に配置 */
+}
+
+.header-logo {
+  width: 148px;
+}
+
+.header-nav {
+  display: flex;
+  gap: 48px;
+}
+
+.header-navList {
+  display: flex;
+  gap: 32px;
+}
+
+.header-navLink {
+  color: var(--primary-color);
+  font-weight: bold;
+  line-height: 1.8;
+  letter-spacing: 0.1em;
+  transition: color 0.3s linear;
+  font-size: 14px;
+  display: inline-block;
+}
+
+/*.button-icon {
+  display: none;
+}*/
+
+.header-info {
+  display: none;
+}
+
+.header-snsList {
+  display: flex;
+  gap: 24px;
+}
+
+.header.is-transparent{
+  background-color: transparent;
+  border: none;
+}
+
+.header.is-transparent:not(.is-open) .header-logo{
+  filter: brightness(10);
+}
+
+.header.is-transparent:not(.is-open) .header-navLink{
+  color: #ffffff;
+}
+
+.header.is-transparent:not(.is-open) .header-snsLink{
+  filter: brightness(10);
+}
+
+.mainVisual {
+  background: url(../img/bg-mainvisual.jpg) center center / cover no-repeat;
+  height: 100vh;
+  padding: 40px 24px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.mainVisual-inner {
+  max-width: 980px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.mainVisual-head {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.mainVisual-title {
+  background-color: #ffffff;
+  color: #0071bc;
+  font-weight: bold;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+  font-size: 24px;
+  padding-left: 20px;
+  padding-right: 4px;
+}
+
+.mainVisual-lead {
+  background-color: #ffffff;
+  font-weight: bold;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+  font-size: 60px;
+  padding-left: 20px;
+}
+
+.mainVisual-scroll {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  text-shadow: 0 0 10px rgba(51, 51, 51, 0.25);
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.mainVisual-scroll::before {
+  content: "";
+  display: block;
+  width: 8px;
+  background-color: #ffffff;
+  border-radius: 100%;
+  box-shadow: 0 0 10px rgba(51, 51, 51, 0.25);
+}
+
+.html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #333333;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+body {
+  color: #333333;
+}
+
+.wrapper {
+  padding: 80px 0 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: content-box;
+  text-align: center;
+}
+
+.section {
+  padding-top: 80px;
+  margin-top: -80px;
+}
+
+.section-body {
+  margin-top: 40px;
+}
+
+.title {
+  text-align: center;
+}
+
+.title-ja {
+  font-size: 36px;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  display: block;
+  font-weight: bold;
+}
+
+.title-en {
+  font-weight: bold;
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  margin-top: 8px;
+  color: var(--primary-color);
+  font-family: var(--english-font);
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.about-column {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.about-picture {
+  width: 470px;
+  border-radius: 10px;
+}
+
+.about-image {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.about-text {
+  font-size: 14px;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+}
+
+.event-slide {
+  overflow: auto;
+  margin: 0 auto;
+}
+
+.event-list {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-left: 200px;
+}
+
+.event-item {
+  border-radius: 10px;
+  overflow: hidden;
+  width: 320px;
+  flex-shrink: 0;
+  background-color: #f7f9fb;
+  text-align: center;
+}
+
+.event-itemImage img {
+  /*width: 100%;*/
+  height: 200px;
+  border-radius: 10px 10px 0 0;
+}
+
+.event-itemBody {
+  padding: 20px;
+}
+
+.event-itemDate {
+  font-size: 14px;
+  line-height: 1.8;
+  letter-spacing: 0.1em;
+  background-color: #0071bc;
+  color: #ffffff;
+  display: inline-block;
+  padding: 0 12px;
+  border-radius: .5em;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.event-itemName {
+  margin-top: 4px;
+  font-size: 18px;
+  line-height: 1.8;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.splide_track {
+  overflow: visible;
+}
+
+.section-lead {
+  text-align: center;
+}
+
+.sb2{
+  margin-top: 100px;
+}
+
+.daily-list {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+  margin-top: 80px;
+}
+
+.splide.is-initialized:not(.is-active) .daily-list{
+  display: flex;
+}
+
+.daily-item {
+  display: flex;
+  background-color: rgb(233, 250, 254);
+  border-radius: 10px;
+  min-height: 324px;
+}
+
+.daily-item:nth-of-type(odd) {
+  flex-direction: row-reverse;
+  margin-right: 40px;
+}
+
+.daily-item:nth-of-type(even) {
+  margin-left: 40px;
+}
+
+.daily-itemImage {
+  border-radius: 10px;
+  overflow: hidden;
+  width: 480px;
+  height: 320px;
+  flex-shrink: 0;
+  margin-top: -40px;
+}
+
+.daily-itemImage img {
+  object-fit: cover;
+  width: 480px;
+}
+
+.daily-item:nth-of-type(odd) .daily-itemImage {
+  margin-right: 0px;
+}
+
+.daily-item:nth-of-type(even) .daily-itemImage {
+  margin-left: -40px;
+}
+
+.daily-itemBody {
+  padding: 48px 56px;
+  width: 100%;
+}
+
+.daily-titleNumber {
+  font-weight: bold;
+  font-size: 58px;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  color: #0071bc;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.daily-titleText {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  margin-left: 20px;
+}
+
+.daily-outline {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.daily-outlineItem::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  background: url(../img/icon-check.svg);
+}
+
+.daily-outlineItem {
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+}
+
+.daily-description {
+  font-size: 14px;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+  margin-top: 12px;
+}
+
+.cta {
+  background: url(../img/bg-cta.jpg) center center / cover no-repeat;
+  color: #ffffff;
+  text-align: center;
+  font-size: 16px;
+  padding: 40px 24px 52px;
+}
+
+.cta-title {
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1.8;
+  letter-spacing: 0.1em;
+  display: flex;
+  justify-content: center;
+  margin: 12px;
+}
+
+.cta-content {
+  font-size: 14px;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+  margin-top: 16px;
+}
+
+.cta-footer {
+  margin-top: 32px;
+}
+
+.cta-button {
+  display: block;
+  width: 315px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #0071bc;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  background-color: #ffffff;
+  border: solid 1px #0071bc;
+  border-radius: 50px;
+  position: relative;
+}
+
+.cta-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  width: 14px;
+  height: 14px;
+}
+
+.cta-button:hover .cta-icon g {
+  stroke: var(--white-color);
+}
+
+.cta-button:hover {
+  background-color: #0071bc;
+  color: #ffffff;
+  border: #ffffff;
+}
+
+.footer {
+  padding-top: 40px;
+  text-align: center;
+}
+
+.footer-inner {
+  display: flex; /* 横並びにするためにflexを指定 */
+  flex-direction: column; /* 縦方向に配置する */
+  align-items: center; /* 要素を垂直方向に中央に配置 */
+  gap: 24px;
+}
+
+.footer-logo {
+  width: 200px;
+  line-height: 1;
+}
+
+.footer-corporateLink {
+  color: var(--gray-dark-color);
+  font-size: 14px;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+  display: inline-flex; /* インラインブロックにすることで中央に寄る */
+  align-items: center; /* 要素を垂直方向に中央に配置 */
+  gap: 4px;
+}
+
+.footer-snsList {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-copyright {
+  text-align: center;
+  margin-top: 24px;
+  border-top: solid 1px var(--gray-light-color);
+  color: var(--gray-color);
+  font-family: var(--english-font);
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  font-size: 10px;
+  padding: 24px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+/* .splide_arrow{
+  width: 40px;
+  height: 40px;
+  border: solid 1px #0071bc;
+  background-color: #ffffff;
+  opacity: 1;
+}
+
+.splide_arrow svg path{
+  fill: #0071bc;
+} */

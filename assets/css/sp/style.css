@@ -1,0 +1,640 @@
+/**
+* File Name : style.css
+* Description : POSSE課題(SP)
+*
+* ---- Table of Contents ----
+*
+* 1.0 - Common
+*    1.1 - カスタムプロパティ
+*    1.2 - ベーススタイル
+*    1.3 - 汎用スタイル
+*
+* 2.0 - Sections
+*    2.1 - ヘッダー
+*    2.2 - フッター
+*    2.3 - メインビジュアル
+*    2.4 - POSSEとは
+*    2.5 - イベント
+*    2.6 - 日常生活
+*    2.7 - 公式LINE
+*
+* 3.0 - Animation, JavaScript Object
+*    3.1 - フェードイン
+*    3.2 - スライダー
+*
+*/
+
+/* ===================================================
+  レスポンシブ
+=================================================== */
+@media (max-width: 768px) {
+  :root {
+    --dark-color: #333333;
+    --white-color: #ffffff;
+    --primary-color: #0071bc;
+    --primary-light-color: #f7f9fb;
+    --gray-color: #adadad;
+    --gray-light-color: #eeeeee;
+    --gray-dark-color: #666666;
+    --twitter-color: #1d9bf0;
+  }
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 48px;
+    /* 以下2つは、CSSカスタムプロパティで色を指定しています。
+      var(--{指定の名前})とすることで、1.1で指定した名前の値を利用できます
+      */
+    background-color: var(--white-color);
+    border-bottom: solid 1px var(--gray-light-color);
+    padding: 0 12px;
+    z-index: 10000;
+    transition: background-color 0.3s linear;
+    display: flex; /* 横並びにするためにflexを指定 */
+    justify-content: space-between; /* 要素の間にスペースを均等に配置 */
+    align-items: center; /* 要素を垂直方向に中央に配置 */
+  }
+
+  .header-logo {
+    width: 100px;
+    z-index: 1; /*POSSEのマーク*/
+  }
+
+  .header-button {
+    width: 42px;
+    height: 42px;
+    position: relative;
+    margin-left: auto;
+    z-index: 1; /*ハンバーガーメニューを開いた後の×マークを見えるように*/
+  }
+
+  .header.is-open .header-nav {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .header-buttonLine {
+    display: block;
+    width: 30px;
+    height: 2px;
+    background-color: #0071bc;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+  }
+
+  .header-buttonLine:nth-of-type(1) {
+    top: 13px;
+  }
+
+  .header-buttonLine:nth-of-type(2) {
+    top: 20px;
+  }
+
+  .header-buttonLine:nth-of-type(3) {
+    top: 27px;
+  }
+
+  .header.is-open .header-buttonLine:nth-of-type(1) {
+    transform: translateX(-50%) rotate(45deg);
+    top: 20px;
+  }
+
+  .header.is-open .header-buttonLine:nth-of-type(2) {
+    opacity: 0;
+  }
+
+  .header.is-open .header-buttonLine:nth-of-type(3) {
+    transform: translateX(-50%) rotate(-45deg);
+    top: 20px;
+  }
+
+  .header-nav {
+    position: fixed;
+    inset: 0;
+    background-color: #f7f9fb;
+    visibility: hidden;
+    opacity: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 124px 24px 40px;
+    transition: visibility 0.3 linear opacity 0.3 linear;
+  }
+
+  .header-navList {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+
+  .header-ctaLink::before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: url(../../img/icon-line.svg) center center / contain no-repeat;
+    position: absolute;
+    top: 50%;
+    left:20px;
+    transform: translateY(-50%); /*高さを中央に*/
+  }
+
+  .header-corporateLink {
+    color: #666666;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .header-corporateLink::after {
+    content: "";
+    display: block;
+    width: 14px;
+    height: 14px;
+    background: url(../../img/icon-external-link.svg) center center / contain
+      no-repeat;
+    /*中央揃えと一枚のみの表示*/
+  }
+
+  .header-navLink {
+    color: var(--primary-color);
+    font-weight: bold;
+    line-height: 1.8;
+    letter-spacing: 0.1em;
+    transition: color 0.3s linear;
+    font-size: 14px;
+    display: inline-block;
+  }
+
+  /*.button-icon {
+    display: block;
+  }*/
+
+  .header-info {
+    display: block;
+  }
+
+  .header-snsList {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    justify-content: center;
+  }
+
+  .cta-button.header-ctaLink{
+    display: flex;
+    justify-content: center;
+  }/*なんか上手く動作しなかったので、ボタン内にあるLINE追加をボタンを中央によせるためこれをつくった。*/
+
+  .header.is-transparent{
+    background-color: transparent;
+    border: none;
+  }
+
+  .header.is-transparent:not(.is-open) .header-logo{
+    filter: brightness(10);
+  }
+
+  .header.is-transparent:not(.is-open) .header-navLink{
+    color: #ffffff;
+  }
+
+  .header.is-transparent:not(.is-open) .header-snsLink{
+    filter: brightness(10);
+  }
+
+  .header.is-transparent:not(.is-open) .header-buttonLine{
+    background-color: #ffffff;
+  }
+  
+  .mainVisual {
+    background-image: url(../../img/bg-mainvisual.jpg);
+    height: 380px;
+    padding: 16px 12px;
+  }
+
+  .mainVisual-inner {
+    max-width: 980px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .mainVisual-head {
+    gap: 8px;
+  }
+
+  .mainVisual-title {
+    font-size: 12px;
+    padding-left: 8px;
+    padding-right: 0px;
+  }
+
+  .mainVisual-lead {
+    font-size: 26px;
+    padding-left: 8px;
+  }
+
+  .mainVisual-scroll {
+    display: none;
+  }
+
+  .mainVisual-scroll::before {
+    content: "";
+    display: block;
+    width: 8px;
+    background-color: #ffffff;
+    border-radius: 100%;
+    box-shadow: 0 0 10px rgba(51, 51, 51, 0.25);
+  }
+
+  .html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    color: #333333;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+
+  body {
+    color: #333333;
+  }
+
+  .wrapper {
+    padding: 40px 12px 80px;
+    gap: 120px;
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  .section {
+    padding-top: 48px;
+    margin-top: -48px;
+  }
+
+  .section-body {
+    margin-top: 20px;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .title-ja {
+    font-size: 24px;
+  }
+
+  .title-en {
+    font-size: 10px;
+    margin-top: 4px;
+  }
+
+  .about-column {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .about-picture {
+    width: 400px;
+  }
+
+  .about-image {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .about-text {
+    font-size: 14px;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+  }
+
+  .event-slide {
+    overflow: auto;
+  }
+
+  .event-list {
+    display: flex;
+    justify-content: flex-start;
+    gap: 40px;
+    margin-left: 0px;
+  }
+
+  .event-item {
+    border-radius: 10px;
+    overflow: hidden;
+    width: 320px;
+    flex-shrink: 0;
+    background-color: #f7f9fb;
+    text-align: center;
+  }
+
+  .event-itemImage img {
+    width: 100%;
+    height: 200px;
+  }
+
+  .event-itemBody {
+    padding: 20px;
+  }
+
+  .event-itemDate {
+    font-size: 14px;
+    line-height: 1.8;
+    letter-spacing: 0.1em;
+    background-color: #0071bc;
+    color: #ffffff;
+    display: inline-block;
+    padding: 0 12px;
+    border-radius: 5em;
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+
+  .event-itemName {
+    margin-top: 4px;
+    font-size: 18px;
+    line-height: 1.8;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+  }
+
+  .section-lead {
+    text-align: center;
+  }
+
+  .daily-slide {
+    overflow: auto;
+  }
+
+  .daily-list {
+    padding-top: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: initial;
+  }
+
+  .daily-item {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    flex-shrink: 0;
+    background-color: #f7f9fb;
+    border-radius: 10px;
+    min-height: 324px;
+  }
+
+  .daily-item:nth-of-type(odd) {
+    flex-direction: column;
+    margin-right: 0px;
+  }
+
+  .daily-item:nth-of-type(even) {
+    margin-left: 0px;
+  }
+
+  .daily-itemImage {
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    width: 100%;
+    height: 200px;
+    flex-shrink: 0;
+    margin-top: 0px;
+  }
+
+  .daily-itemImage img {
+    object-fit: cover;
+    width: 480px;
+  }
+
+  .daily-item:nth-of-type(odd) .daily-itemImage {
+    margin-right: 0px;
+  }
+
+  .daily-item:nth-of-type(even) .daily-itemImage {
+    margin-left: 0px;
+  }
+
+  .daily-itemBody {
+    padding: 20px 24px;
+    width: 100%;
+  }
+
+  .daily-titleNumber {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    color: #0071bc;
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+
+  .daily-titleText {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+    margin-left: 12px;
+  }
+
+  .daily-outline {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .daily-outlineItem::before {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    background: url(../img/icon-check.svg);
+  }
+
+  .daily-outlineItem {
+    font-weight: bold;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.5;
+    letter-spacing: 0.1em;
+  }
+
+  .daily-description {
+    font-size: 14px;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+    margin-top: 12px;
+  }
+
+  .cta {
+    background: url(../../img/sp/bg-cta.jpg) center center / cover no-repeat;
+    color: #ffffff;
+    text-align: center;
+    font-size: 16px;
+    padding: 40px 12px 52px;
+  }
+
+  .cta-title {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.8;
+    letter-spacing: 0.1em;
+    display: flex;
+    justify-content: center;
+    margin: 12px;
+  }
+
+  .cta-content {
+    font-size: 14px;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+    margin-top: 16px;
+    text-align: left;
+  }
+
+  .cta-footer {
+    margin-top: 32px;
+  }
+
+  .cta-button {
+    display: block;
+    width: 315px;
+    margin: 0 auto;
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #0071bc;
+    line-height: 1.5;
+    letter-spacing: 0.1em;
+    background-color: #ffffff;
+    border: solid 1px #0071bc;
+    border-radius: 50px;
+    position: relative;
+  }
+
+  .cta-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+    width: 14px;
+    height: 14px;
+  }
+
+  .cta-button:hover .cta-icon g {
+    stroke: var(--white-color);
+  }
+
+  .cta-button:hover {
+    background-color: #0071bc;
+    color: #ffffff;
+    border: #ffffff;
+  }
+
+  .footer {
+    padding-top: 40px;
+    text-align: center;
+  }
+
+  .footer-inner {
+    display: flex; /* 横並びにするためにflexを指定 */
+    flex-direction: column; /* 縦方向に配置する */
+    align-items: center; /* 要素を垂直方向に中央に配置 */
+    gap: 24px;
+  }
+
+  .footer-logo {
+    width: 160px;
+    line-height: 1;
+  }
+
+  .footer-corporateLink {
+    color: var(--gray-dark-color);
+    font-size: 14px;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+    display: inline-flex; /* インラインブロックにすることで中央に寄る */
+    align-items: center; /* 要素を垂直方向に中央に配置 */
+    gap: 4px;
+  }
+
+  .footer-snsList {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-copyright {
+    text-align: center;
+    margin-top: 24px;
+    border-top: solid 1px var(--gray-light-color);
+    color: var(--gray-color);
+    font-family: var(--english-font);
+    letter-spacing: 0.1em;
+    line-height: 1.5;
+    font-size: 10px;
+    padding: 24px;
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+  /* 1.0 - Common */
+  /* ============================================ */
+
+  /**
+  * 1.2 - ベーススタイル
+  */
+
+  /**
+  * 1.3 - 汎用スタイル
+  */
+
+  /* 2.0 - Sections */
+  /* ============================================ */
+
+  /**
+  * 2.1 - ヘッダー
+  */
+
+  /**
+  * 2.2 - フッター
+  */
+
+  /**
+  * 2.3 - メインビジュアル
+  */
+
+  /**
+  * 2.4 - POSSEとは
+  */
+
+  /**
+  * 2.5 - イベント
+  */
+
+  /**
+  * 2.6 - 日常生活
+  */
+
+  /**
+  * 2.7 - 公式LINE
+  */
+
+  /* 3.0 - Animation, JavaScript Object */
+  /* ============================================ */
+
+  /**
+  * 3.1 - フェードイン
+  */
+
+  /**
+  * 3.2 - スライダー
+  */
+}
