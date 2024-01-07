@@ -81,7 +81,7 @@
     height: 2px;
     background-color: #0071bc;
     position: absolute;
-    left: 50%;
+    left: 50%; 
     transform: translate(-50%);
   }
 
@@ -456,7 +456,7 @@
     width: 24px;
     height: 24px;
     flex-shrink: 0;
-    background: url(../img/icon-check.svg);
+    background: url(../../img/icon-check.svg);
   }
 
   .daily-outlineItem {
